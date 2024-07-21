@@ -1,0 +1,45 @@
+_module_src: models.gandalf
+_model_name: GANDALFModel
+_backbone_name: GANDALFBackbone
+_config_name: GANDALFConfig
+
+task: classification
+head: LinearHead
+head_config:
+  layers: ""
+  activation: ReLU
+  dropout: 0.1
+  use_batch_norm: false
+  initialization: xavier
+learning_rate: 1e-3
+loss: CrossEntropyLoss
+metrics:
+  - accuracy
+  - f1_score
+  - precision
+  - recall
+  - specificity
+  - cohen_kappa
+  - auroc
+metrics_prob_input:
+  - True
+  - True
+  - True
+  - True
+  - True
+  - True
+  - True
+metrics_params:
+  - {task: multiclass, num_classes: 2, average: 'macro'}
+  - {task: multiclass, num_classes: 2, average: 'macro'}
+  - {task: multiclass, num_classes: 2, average: 'macro'}
+  - {task: multiclass, num_classes: 2, average: 'macro'}
+  - {task: multiclass, num_classes: 2, average: 'macro'}
+  - {task: multiclass, num_classes: 2}
+  - {task: multiclass, num_classes: 2, average: 'macro'}
+target_range: null
+seed: 42
+
+gflu_stages: 6
+gflu_dropout: 0.0
+gflu_feature_init_sparsity: 0.3

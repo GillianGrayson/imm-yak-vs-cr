@@ -1,0 +1,47 @@
+_module_src: models.danet
+_model_name: DANetModel
+_backbone_name: DANetBackbone
+_config_name: DANetConfig
+
+task: classification
+head: LinearHead
+head_config:
+  layers: ""
+  activation: ReLU
+  dropout: 0.1
+  use_batch_norm: false
+  initialization: xavier
+learning_rate: 1e-3
+loss: CrossEntropyLoss
+metrics:
+  - accuracy
+  - f1_score
+  - precision
+  - recall
+  - specificity
+  - cohen_kappa
+  - auroc
+metrics_prob_input:
+  - True
+  - True
+  - True
+  - True
+  - True
+  - True
+  - True
+metrics_params:
+  - {task: multiclass, num_classes: 2, average: 'macro'}
+  - {task: multiclass, num_classes: 2, average: 'macro'}
+  - {task: multiclass, num_classes: 2, average: 'macro'}
+  - {task: multiclass, num_classes: 2, average: 'macro'}
+  - {task: multiclass, num_classes: 2, average: 'macro'}
+  - {task: multiclass, num_classes: 2}
+  - {task: multiclass, num_classes: 2, average: 'macro'}
+target_range: null
+seed: 42
+
+n_layers: 8
+abstlay_dim_1: 32
+abstlay_dim_2: null
+k: 5
+dropout_rate: 0.1
